@@ -50,7 +50,7 @@ app.get('/api/events', async (req, res) =>{
             console.log(response);
             res.json(response)
     
-        } catch (e){
+        } catch (error){
             console.log(error);
             return res.status(400).json({error});
         }

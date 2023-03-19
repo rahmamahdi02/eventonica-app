@@ -36,6 +36,8 @@ function Events() {
         setEvents((events) => [...events, data])
       })
     }
+
+
 // delete event in data & server
 
 const deleteEvent = async (id) => {
@@ -47,6 +49,21 @@ const deleteEvent = async (id) => {
   } catch (err){
     console.error(err.message);
   }
+}
+
+// edit event in DB
+
+const putRequest = () => {
+  fetch(`http://localhost:8080/api/events/${event.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/JSON"
+    },
+    body: JSON.stringify(event)
+  })
+    .then(() => {
+      props.getRequest();
+    });
 }
 
     // add formEvent w/ terneray operator & button for user to hit 

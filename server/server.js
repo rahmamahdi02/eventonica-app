@@ -57,7 +57,18 @@ app.get('/api/events', async (req, res) =>{
 
     // Update Event to DB & Render w/ Put Request
 
-    
+    // app.put('/api/events/:eventID', async (req, res) => {
+    //     const id = parseInt(req.params.eventID);
+    //     try {
+    //         const result = await db.query(
+    //             "UPDATE events SET name = $1, date = $2, description = $3, category = $4, favorite = $5 WHERE id = $6 RETURNING *", 
+    //             [req.body.name, req.body.date, req.body.description, req.body.category, req.body.favorite, id]
+    //         );
+    //     } catch(error) {
+    //         console.log(error);
+    //     }
+    //     return res.end();
+    // })
   
 
 // Delete Event to DB & Render 

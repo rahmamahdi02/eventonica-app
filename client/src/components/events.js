@@ -7,6 +7,7 @@ import FormEvent from "./formevent";
 
 function Events() {
     const [events, setEvents] = useState([]);
+
 // fetch data from server & DB
     const getRequest = () => {
       fetch("http://localhost:8080/api/events")
@@ -16,6 +17,7 @@ function Events() {
         console.log('Events fetched...', events);
         });
     }
+    
 // add to data in sercer & DB
     useEffect(() => {getRequest()}, []);
 
@@ -52,8 +54,8 @@ const deleteEvent = async (id) => {
   return (
     <div>
     <CardGroup className="Events">
-            {events.map(event =>
-            <EventCard key={event.id} title={event.title} location={event.location} time={event.eventtime} deleteEvent={deleteEvent} />
+    {events.map(event =>
+            <EventCard key={event.id} id={event.id} title={event.title} location={event.location} time={event.eventtime} deleteEvent={deleteEvent}/>
             )}
     </CardGroup>
     <FormEvent postRequest={postRequest} />  

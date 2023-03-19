@@ -36,7 +36,16 @@ function Events() {
     }
 // delete event in data & server
 
-
+const deleteEvent = async (id) => {
+  try {
+    const deleteEvent = await fetch(`http://localhost:8080/api/events/${id}`, {
+    method: "DELETE"
+    }); 
+    setEvents(events.filter(event => event.id !== id))
+  } catch (err){
+    console.error(err.message);
+  }
+}
 
     // add formEvent w/ terneray operator & button for user to hit 
     
@@ -44,7 +53,7 @@ function Events() {
     <div>
     <CardGroup className="Events">
             {events.map(event =>
-            <EventCard key={event.id} title={event.title} location={event.location} time={event.eventtime}/>
+            <EventCard key={event.id} title={event.title} location={event.location} time={event.eventtime} deleteEvent={deleteEvent} />
             )}
     </CardGroup>
     <FormEvent postRequest={postRequest} />  

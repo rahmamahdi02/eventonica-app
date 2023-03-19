@@ -22,9 +22,9 @@ app.get("/", (req, res) => {
   });
 
 
+  // Render Event from DB
 app.get('/api/events', async (req, res) =>{
 
-    //real connection with the DB eventonica
     try{
         const { rows: events } = await db.query('SELECT * FROM events');
         res.send(events);
@@ -35,10 +35,9 @@ app.get('/api/events', async (req, res) =>{
 
     }})
 
-
+// Add Event to DB & Render w/ Post Request
     app.post("/api/events", async (req, res) => {
-        //TO - DO - At the end => save this event to the db
-        //INSERT INTO events (title, location, eventtime) VALUES ('Women in Tech Techtonica Panel', 'Overland Park Convention Center', '2023-04-21')
+     
         try {
             const newEvent = {
                 title: req.body.title,
@@ -55,7 +54,32 @@ app.get('/api/events', async (req, res) =>{
             return res.status(400).json({error});
         }
     })
-    
 
+    // Update Event to DB & Render w/ Put Request
+
+    
+    const updateEvent = await db.query(
+        "UPDATE events SET name=$1, date = $2, category = $3, description = $4 WHERE event_id = $5 RETURNING *",
+        [name, date, category, description, id]
+      );
+      res.json(updateEvent.rows[0]);
+    } catch (error) {
+      console.error(error.message);
+    }
+  });
+
+// Delete Event to DB & Render 
+
+app.delete("/api/events/:id", async (req, res) => {
+	try {
+		const result = await db.query(
+			`DELETE FROM events WHERE id=${req.params.eventId}`
+		);
+	
+		res.send({ message: "Sucess"}); //
+	} catch (error) {
+		console.log(error.message);
+	}
+});
 
 app.listen(PORT, () => console.log(`Hola! Server running on Port http://localhost:${PORT}`));

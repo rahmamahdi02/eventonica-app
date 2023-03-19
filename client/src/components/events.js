@@ -7,7 +7,7 @@ import FormEvent from "./formevent";
 
 function Events() {
     const [events, setEvents] = useState([]);
-
+// fetch data from server & DB
     const getRequest = () => {
       fetch("http://localhost:8080/api/events")
       .then((response) => response.json())
@@ -16,7 +16,7 @@ function Events() {
         console.log('Events fetched...', events);
         });
     }
-
+// add to data in sercer & DB
     useEffect(() => {getRequest()}, []);
 
     const postRequest = (newEvent) =>{
@@ -34,9 +34,12 @@ function Events() {
         setEvents((events) => [...events, data])
       })
     }
+// delete event in data & server
+
+
 
     // add formEvent w/ terneray operator & button for user to hit 
-    // 
+    
   return (
     <div>
     <CardGroup className="Events">

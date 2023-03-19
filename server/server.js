@@ -58,28 +58,20 @@ app.get('/api/events', async (req, res) =>{
     // Update Event to DB & Render w/ Put Request
 
     
-    const updateEvent = await db.query(
-        "UPDATE events SET name=$1, date = $2, category = $3, description = $4 WHERE event_id = $5 RETURNING *",
-        [name, date, category, description, id]
-      );
-      res.json(updateEvent.rows[0]);
-    } catch (error) {
-      console.error(error.message);
-    }
-  });
+  
 
 // Delete Event to DB & Render 
 
-app.delete("/api/events/:id", async (req, res) => {
-	try {
-		const result = await db.query(
-			`DELETE FROM events WHERE id=${req.params.eventId}`
-		);
+// app.delete("/api/events/:id", async (req, res) => {
+// 	try {
+// 		const result = await db.query(
+// 			`DELETE FROM events WHERE id=${req.params.eventId}`
+// 		);
 	
-		res.send({ message: "Sucess"}); //
-	} catch (error) {
-		console.log(error.message);
-	}
-});
+// 		res.send({ message: "Sucess"}); //
+// 	} catch (error) {
+// 		console.log(error.message);
+// 	}
+// });
 
 app.listen(PORT, () => console.log(`Hola! Server running on Port http://localhost:${PORT}`));

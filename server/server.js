@@ -62,11 +62,11 @@ app.get('/api/events', async (req, res) =>{
 
 // Delete Event to DB & Render 
 
-app.delete('/api/events/:id', async (req, res) => {
+app.delete('/api/events/:eventId', async (req, res) => {
 
     try {
-       const {id} = req.params;
-       const event = await db.query('DELETE FROM events WHERE id = $1', [id]);
+       const {eventId} = req.params;
+       const event = await db.query('DELETE FROM events WHERE id = $1', [eventId]);
        res.json(event.rows[0]);
    } catch (error) {
        return res.status(400).json({ error });

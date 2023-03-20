@@ -70,12 +70,14 @@ const putRequest = () => {
     
   return (
     <div>
+          <FormEvent postRequest={postRequest} />  
+
     <CardGroup className="Events">
+
     {events.map(event =>
             <EventCard key={event.id} id={event.id} title={event.title} location={event.location} time={event.eventtime} deleteEvent={deleteEvent}/>
             )}
     </CardGroup>
-    <FormEvent postRequest={postRequest} />  
     </div>
   );
 }
